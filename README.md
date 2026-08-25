@@ -1,6 +1,5 @@
 # quantum-future-feedback-hardware
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22099471.svg)](https://doi.org/10.5281/zenodo.22099471)
 
 Code, count data, pre-registered plans and machine-checkable gates for the
 hardware campaigns of the future-referential feedback series.

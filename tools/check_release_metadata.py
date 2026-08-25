@@ -30,10 +30,21 @@ rid = z.get("related_identifiers", [])
 unfilled = [r for r in rid if "XXXX" in str(r.get("identifier", ""))
             or "TO BE FILLED" in str(r.get("identifier", ""))]
 chk(not unfilled, "08 no placeholder related_identifiers")
+# Zenodo cannot pre-reserve a DOI when the GitHub integration mints it, so the
+# first release ships without one and later releases carry it. The gate
+# therefore enforces AGREEMENT, not presence: a DOI in one file and a
+# different one (or none) in the other is the failure worth catching.
+readme = open(os.path.join(HERE, "README.md")).read()
 m2 = re.search(r'^doi:\s*"?(10\.\d{4,}/[^"\s]+)"?', c, re.M)
-chk(bool(m2), "08b CITATION.cff carries a real DOI")
-chk(m2 is not None and m2.group(1) in open(os.path.join(HERE, "README.md")).read(),
-    "08c README DOI badge matches CITATION.cff")
+m3 = re.search(r'zenodo\.org/badge/DOI/(10\.\d{4,}/[^)\s]+)\.svg', readme)
+cff_doi = m2.group(1) if m2 else None
+badge_doi = m3.group(1) if m3 else None
+if cff_doi is None and badge_doi is None:
+    chk(True, "08b no DOI yet (pre-first-release; Zenodo mints it on release)")
+else:
+    chk(cff_doi is not None and badge_doi is not None and cff_doi == badge_doi,
+        "08b CITATION.cff DOI and README badge agree (cff=%s badge=%s)"
+        % (cff_doi, badge_doi))
 # Shape test, deliberately holding no identifier: any cloud resource name
 # still carrying a 32-hex account or a UUID instance is a leak. Storing the
 # real ids here would itself be the thing this check forbids.
