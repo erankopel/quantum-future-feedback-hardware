@@ -1,0 +1,8 @@
+{
+ "c0_per_job": 2.3003447816680653,
+ "a_per_circuit": -0.002238655657577758,
+ "b_per_shot": 0.0002662978534623922,
+ "safety_factor": 1.02,
+ "n_charges": 20,
+ "note": "per-job intercept; validated on the W3-0b ping"
+}

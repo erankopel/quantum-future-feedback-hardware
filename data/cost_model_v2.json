@@ -1,0 +1,7 @@
+{
+ "a_per_circuit": 0.005747523495754546,
+ "b_per_shot": 0.0002676436250132787,
+ "safety_factor": 1.05,
+ "n_charges": 19,
+ "source": "19 actual charges, accounts A1+A2, ibm_kingston"
+}

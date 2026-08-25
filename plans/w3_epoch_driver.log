@@ -1,0 +1,17 @@
+[12:27:00] fetched 1 epoch(s)
+[12:27:04] usage 283 s consumed, 317 s remaining; next arm=plain
+[12:29:09] fetched 1 epoch(s)
+[12:29:13] usage 304 s consumed, 296 s remaining; next arm=both
+[12:32:38] fetched 1 epoch(s)
+[12:32:43] usage 345 s consumed, 255 s remaining; next arm=plain
+[12:35:25] fetched 1 epoch(s)
+[12:35:29] usage 366 s consumed, 234 s remaining; next arm=both
+[12:55:15] fetched 1 epoch(s)
+[12:55:20] usage 407 s consumed, 193 s remaining; next arm=plain
+[12:59:12] fetched 1 epoch(s)
+[12:59:17] usage 428 s consumed, 172 s remaining; next arm=both
+[13:22:06] fetched 1 epoch(s)
+[13:22:11] usage 469 s consumed, 131 s remaining; next arm=plain
+[13:24:39] fetched 1 epoch(s)
+[13:24:43] usage 490 s consumed, 110 s remaining; next arm=plain
+[13:44:36] DRIVER DONE. usage 511 s consumed, 89 s remaining

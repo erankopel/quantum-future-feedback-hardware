@@ -1,0 +1,157 @@
+{
+ "label": "certified-given-shots (register 4, Paper VII); 72-symbol affine arithmetic, arb 256-bit",
+ "delta": 0.001,
+ "settings": 72,
+ "rows": [
+  {
+   "eps": 0.001,
+   "shots": 100000,
+   "implemented": 46,
+   "ball_lower": 10,
+   "ball_first_ppt": null,
+   "affine_lower": 19,
+   "affine_first_ppt": null,
+   "gain_rounds": 9
+  },
+  {
+   "eps": 0.001,
+   "shots": 1000000,
+   "implemented": 46,
+   "ball_lower": 19,
+   "ball_first_ppt": null,
+   "affine_lower": 34,
+   "affine_first_ppt": null,
+   "gain_rounds": 15
+  },
+  {
+   "eps": 0.001,
+   "shots": 10000000,
+   "implemented": 46,
+   "ball_lower": 29,
+   "ball_first_ppt": null,
+   "affine_lower": 43,
+   "affine_first_ppt": null,
+   "gain_rounds": 14
+  },
+  {
+   "eps": 0.001,
+   "shots": 100000000,
+   "implemented": 46,
+   "ball_lower": 37,
+   "ball_first_ppt": null,
+   "affine_lower": 44,
+   "affine_first_ppt": null,
+   "gain_rounds": 7
+  },
+  {
+   "eps": 0.001,
+   "shots": 1000000000,
+   "implemented": 46,
+   "ball_lower": 42,
+   "ball_first_ppt": null,
+   "affine_lower": 45,
+   "affine_first_ppt": null,
+   "gain_rounds": 3
+  },
+  {
+   "eps": 0.003,
+   "shots": 100000,
+   "implemented": 24,
+   "ball_lower": 9,
+   "ball_first_ppt": null,
+   "affine_lower": 15,
+   "affine_first_ppt": null,
+   "gain_rounds": 6
+  },
+  {
+   "eps": 0.003,
+   "shots": 1000000,
+   "implemented": 24,
+   "ball_lower": 15,
+   "ball_first_ppt": null,
+   "affine_lower": 21,
+   "affine_first_ppt": null,
+   "gain_rounds": 6
+  },
+  {
+   "eps": 0.003,
+   "shots": 10000000,
+   "implemented": 24,
+   "ball_lower": 19,
+   "ball_first_ppt": null,
+   "affine_lower": 23,
+   "affine_first_ppt": null,
+   "gain_rounds": 4
+  },
+  {
+   "eps": 0.003,
+   "shots": 100000000,
+   "implemented": 24,
+   "ball_lower": 22,
+   "ball_first_ppt": null,
+   "affine_lower": 23,
+   "affine_first_ppt": null,
+   "gain_rounds": 1
+  },
+  {
+   "eps": 0.003,
+   "shots": 1000000000,
+   "implemented": 24,
+   "ball_lower": 22,
+   "ball_first_ppt": null,
+   "affine_lower": 23,
+   "affine_first_ppt": 24,
+   "gain_rounds": 1
+  },
+  {
+   "eps": 0.0001,
+   "shots": 100000,
+   "implemented": 81,
+   "ball_lower": 11,
+   "ball_first_ppt": null,
+   "affine_lower": 22,
+   "affine_first_ppt": null,
+   "gain_rounds": 11
+  },
+  {
+   "eps": 0.0001,
+   "shots": 1000000,
+   "implemented": 81,
+   "ball_lower": 21,
+   "ball_first_ppt": null,
+   "affine_lower": 44,
+   "affine_first_ppt": null,
+   "gain_rounds": 23
+  },
+  {
+   "eps": 0.0001,
+   "shots": 10000000,
+   "implemented": 81,
+   "ball_lower": 36,
+   "ball_first_ppt": null,
+   "affine_lower": 67,
+   "affine_first_ppt": null,
+   "gain_rounds": 31
+  },
+  {
+   "eps": 0.0001,
+   "shots": 100000000,
+   "implemented": 81,
+   "ball_lower": 52,
+   "ball_first_ppt": null,
+   "affine_lower": 77,
+   "affine_first_ppt": null,
+   "gain_rounds": 25
+  },
+  {
+   "eps": 0.0001,
+   "shots": 1000000000,
+   "implemented": 81,
+   "ball_lower": 64,
+   "ball_first_ppt": null,
+   "affine_lower": 79,
+   "affine_first_ppt": null,
+   "gain_rounds": 15
+  }
+ ]
+}

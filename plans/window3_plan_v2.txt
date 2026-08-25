@@ -1,0 +1,376 @@
+================================================================
+PAPER VII, WINDOW 3: AMENDMENT 1 TO THE PRE-REGISTERED PLAN
+Amended 25 Aug 2026, before the window opens. ASCII, no em
+dashes, series discipline. The 25 Aug pre-registration stands as
+written; every change below is listed, dated and justified, and
+all of it is on the record BEFORE any circuit is submitted.
+================================================================
+
+WHY AN AMENDMENT AT ALL. The plan was written for a window that
+was expected to open on 21 Sep 2026 on the account that spent
+594 s on 24 Aug. The window has instead opened on 25 Aug on a
+THIRD account, verified live at 10:02 UTC today:
+
+  instance  crn:...:a/REDACTED-ACCOUNT-3...:REDACTED-INSTANCE-3
+  plan      open (free), usage period 28 Jul to 25 Aug 2026
+  consumed  0 s of 600 s        remaining 600 s
+  backend   ibm_kingston, operational, queue depth 1 to 2
+
+That single fact changes the experimental situation in the
+series' favour and is the reason for every item below.
+
+A1  WINDOW SECTION REPLACED. There is no 6 s remnant and no wait
+    to 21 Sep. The window is a full 600 s and it is open now. The
+    device is the same ibm_kingston; only the billing account
+    differs, so the physics and the locked triple are unchanged.
+    This is a deviation from the registered window text and is
+    recorded as such. The 594 s on the second account still frees
+    on 21 Sep, and this account's spend returns 28 days after it
+    is spent, so window 3 is no longer the series' last budget.
+    Consequence: unspent stability epochs are deferred, not lost.
+
+A2  W3-0 PREFLIGHT: EXECUTED AND PASSED, ZERO QPU, 25 Aug 2026.
+      usage 600 s fresh, ibm_kingston operational, queue 1
+      calibration snapshot last_update_date 2026-08-25 08:25 UTC
+      q21  T1 401.8 us  T2 160.5 us  readout err 0.00903
+      q22  T1 156.8 us  T2 121.4 us  readout err 0.02002
+      q36  T1 142.8 us  T2 143.3 us  readout err 0.00806
+      link (21,22) err 0.00146   link (21,36) err 0.00182
+      BOTH SERIES LINKS PRESENT: yes. The plan proceeds.
+      GATE GCORE re-run: PASS on rung2, rung4, rung5, rung6.
+      GATE GVZ dry-run on the live target: PASS, 15 insertions.
+      GATE GGST2 dry-run at L<=8: PASS, 1813/1813 circuits.
+      rung8 corrected arm dry-run: PASS, +15 rz, all other op
+      counts identical, submit path proven blocked.
+
+A3  THETA IS ONE DAY OLD, NOT ONE MONTH. Register 14 ran on
+    24 Aug; the calibration in force is 1.5 h old. The staleness
+    that motivated the scan's width is largely gone. The scan is
+    NOT narrowed: the registered grid is kept exactly, because
+    narrowing it after seeing the situation would be a
+    post-registration choice with no independent justification,
+    and the wide grid still costs nothing extra.
+
+A4  COST MODEL CORRECTED. The registered model
+    cost = N * (0.0121 + 2.577e-4 * shots) was said to be good to
+    2 per cent on five charges. Re-fitted against ALL NINETEEN
+    charges now recoverable from the two earlier accounts, it
+    UNDER-predicts by up to 5.7 per cent. Replacement:
+        cost = N * (0.005748 + 2.676436e-4 * shots) * 1.05
+    max under-prediction 4.4 per cent before the factor, zero
+    after it. Constants updated in rung11b, rung10 and rung8, and
+    every budget guard now tests the safety-loaded figure. The
+    registered ledger was optimistic by 5 to 9 per cent; the
+    ledger below is priced on the corrected model.
+
+A5  NEW ITEM W3-0b, COST PING, ~3.5 s. 12 circuits (the z+/z-
+    sextet of the real tomography design) x 1024 shots, submitted
+    first, purely to price this THIRD account before 106 s is
+    committed on a model fitted against two others. It is also a
+    live confirmation that the round executes on the locked
+    triple. Refit is written to cost_model_w3.json and the later
+    items re-priced from it.
+
+A6  THE V-FIT IS THE WRONG SHAPE. The correction is inserted at
+    the same 15 (21,36) CZ sites that carry the error, so it
+    propagates through the same interleaving and cancels at one
+    step whatever the transfer factor. The response is therefore
+        angle(x) = sqrt( p^2 + q^2 (x - x0)^2 )
+    a hyperbola, a rounded V. The registered code fits a
+    PARABOLA to all five arms. Monte Carlo at the measured noise
+    floor, 3000 trials per point, true optimum -2.84 deg:
+        5-arm parabola   -3.02 to -3.07 deg, sd 0.32 to 1.23
+        hyperbola        -2.83 to -2.87 deg, sd 0.17 to 0.76
+    The parabola is biased by +0.2 deg and is 1.5 to 2 times
+    looser. Replacement, in w3_vfit.py: hyperbola PRIMARY,
+    parabola on the three bracketing arms (k = 0,-1,-2)
+    SECONDARY, 5-arm parabola retained as a reported diagnostic.
+
+A7  GATE G-VZ HAD NO SIGMA. The gate says "3 sigma" and nothing
+    computed one. Sigma is now a parametric bootstrap on the
+    click probabilities, 400 draws, re-running the full explorer
+    bundle. Measured floor at 1024 shots, from data in hand:
+        sd(angle) 0.60 deg, sd(eta) 0.0032, sd(eta') 0.0033.
+
+A8  NEW PRIMARY STATISTIC: THE SIGNED-ARM ASYMMETRY.
+        ASYM1 = angle(+1) - angle(-1),  ASYM2 = angle(+2)-angle(-2)
+    Under the null the +k and -k arms are exchangeable, so the
+    expectation is exactly zero and drift enters both equally.
+    Power at the measured floor:
+        f_z    V2 as registered    ASYM1        ASYM2
+        0.50         2%             72%         100%
+        0.70        23%            100%         100%
+        0.90        92%            100%         100%
+    where f_z is the cosine between the round's rotation axis and
+    Z, the only component a virtual Z can cancel.
+
+A9  f_z IS ALREADY MEASURED, AND THE SCAN IS POWERED. From the
+    rung2 baseline, which is the very circuit W3-1 runs:
+        rung2 baseline  angle 6.67 deg   f_z 0.919 +/- 0.036
+        rung6 plain     angle 28.47 deg  f_z 0.987 +/- 0.003
+        rung6 echo      angle  9.27 deg  f_z 0.515 +/- 0.056
+    At f_z = 0.92 the registered V2 has about 92 per cent power
+    and ASYM has 100 per cent. W3-1 is powered as written at
+    1024 shots; the shot count is NOT raised.
+    NOTE FOR THE MANUSCRIPT, free finding: the echo arm's
+    residual is only half Z-type. The echo removes the Z-type
+    rotation and leaves a non-Z remainder, so W3-1 tests the
+    PLAIN round's Z-type rotation and does not by itself address
+    the echo-surviving residual. That distinction must be kept in
+    the text.
+
+A10 PREDICTION V2's SIGN CLAUSE IS WITHDRAWN AND RE-ISSUED.
+    Registered V2 asserted the minimum is displaced to NEGATIVE
+    k. The evidence already in hand points the other way:
+      the round's measured rotation axis has n_z = -0.919, i.e.
+        a Z rotation of -6.13 deg;
+      register 14's per-gate CZ phase is H(ZI) = -2.84 deg, the
+        SAME sign, so the transfer factor is positive and
+        15 * kappa * 2.84 = 6.13 with kappa = 0.144;
+      qiskit's rz(+t) = exp(-i t Z/2) ADDS +t to the Bloch
+        rotation about +Z.
+    Cancelling -6.13 deg therefore needs POSITIVE k. V2 is now
+    sign-neutral (the minimum is displaced from k = 0, direction
+    recorded as an output) and the sign is re-issued as the
+    sharper, riskier side-prediction
+      V2P the minimum lies at k = +1.
+    Either outcome is a clean measurement: a minimum at k = -1
+    measures a NEGATIVE transfer factor, that is, the interleaved
+    single-qubit layer reversing the frame between insertions.
+    ASYM is likewise tested two-sided.
+
+A11 THETA HAND-OFF IS NOW GUARDED. w3_theta.json fed rung8's
+    corrected arm with no check at all. It is now written only if
+    the gate passed, the run is not a control, there is no drift
+    artefact, AND |theta_opt| is inside the scanned half-span.
+    Verified against a synthetic end-to-end self-test with four
+    cases: true effect at +k, null, reversed transfer at -k, and
+    a half-size phase whose optimum falls at the grid edge. All
+    four returned the correct path and the correct write/refuse.
+
+A12 NEW ITEM W3-1b, THE WRONG-LINK CONTROL, ~63 s, PATH A ONLY.
+    Three arms (k = 0,-1,+1) x 72 settings, 1024 shots, the SAME
+    insertion machinery pointed at the OTHER link (21,22), which
+    carries 9 of the round's 24 two-qubit gates, using the
+    measured theta_opt rather than the nominal 2.84 deg.
+    Pre-registered prediction:
+      C1 ASYM on the control link is consistent with zero at
+         under 3 sigma while ASYM on (21,36) is above it.
+    Justification: register 14 puts the gauge-invariant
+    eigenphase at 4.15 +/- 1.54 deg on (21,36), 2.69 sigma, and
+    0.35 +/- 1.49 deg on (21,22), 0.23 sigma. Without the control
+    a successful scan shows only that SOME virtual Z helps. With
+    it, the claim is localisation: the correction works on the
+    identified link and not on the other one. That is the
+    difference between a correlation and the paper's actual
+    claim, and it costs 63 s. It runs AFTER the G-VZ verdict, in
+    the same calibration day, so it can use the winning theta.
+    It is implemented as options on the already gate-validated
+    rung11b (--link, --ks, --tag), not as new code.
+
+A13 PATH B HAD NO CLOSING MOVE, AND ITS EPOCHS WERE MIS-PRICED.
+    Registered Path B budgeted 7 alternating epochs at ~200 s,
+    but alternation needs a theta and Path B is the branch where
+    no theta exists. Path B epochs are plain-only at 21.2 s.
+    Path B still ends with a sharper number and no functional
+    test; that is inherent, and the corrected ledger leaves it a
+    reserve large enough to carry a re-scan into the next window.
+
+A14 ADVERSARIAL REVIEW OF THE AMENDED CODE, 25 Aug 2026, and
+    the defects it found. Everything below was found BEFORE any
+    submission and is fixed and unit-tested in the committed
+    code. Recorded because a pre-registration that hides its own
+    near-misses is worth less than one that lists them.
+
+    MONEY. rung10's per-chunk budget guard had no running total.
+    SamplerV2.run is fire-and-forget, so svc.usage() cannot have
+    billed the chunks already in flight; every iteration compared
+    the SAME stale consumed figure against ONE chunk and the
+    guard never fired. Simulated: starting from 430 s consumed it
+    submitted all 8 chunks and reached 636.6 s against a 600 s
+    hard budget. Fixed by summing in-flight estimates; the same
+    simulation now stops after 2 chunks at 487.0 s. An up-front
+    whole-design check and a per-chunk record write were added,
+    the latter so an interrupted run does not lose its job ids.
+
+    MONEY. rung10's defaults were still the register-14 reduced
+    design (L<=4, 512 shots). Run as W3-2 with --maxL 8 but the
+    old shot default it would have cost 272 s, 65 s over the
+    budgeted 207 s, and Path B would have totalled 551 s. The
+    defaults are now the W3-2 values, L<=8 at 384 shots, so
+    "--pair 21,36" alone is the pre-registered design.
+    rung10's CAP_TOTAL stays at 500, deliberately below the
+    G-STAB cap of 550, to reserve 50 s for stability epochs.
+
+    MONEY. w3_0b_costping.py had no budget guard at all. Added.
+
+    SCIENCE. GATE GVZ's insertion assertion was a tautology:
+    n_ins counted MATCHING GATES, not inserted rz, so it compared
+    a number with itself. It passed with zero rz inserted, and it
+    passed for a link carrying no two-qubit gate at all, in which
+    case all five arms are byte-identical and the 106 s scan
+    measures nothing while appearing to pass. The gate now
+    asserts the rz DELTA and refuses n_link = 0 or theta0 = 0.
+    Verified: --link 21,20 now aborts.
+
+    SCIENCE. w3_theta.json's write condition diverged from the
+    path: a V2-only result printed PATH B and wrote the theta in
+    the same breath. Writing is now gated on the path being A.
+
+    SCIENCE. The span guard used "<=" against the OUTER grid
+    point, so an optimum sitting on the grid edge was written
+    about half the time, which is exactly risk R5. It now
+    requires half a grid step of clearance AND that the winning
+    arm is not the edge arm. A first correction over-tightened it
+    to the second-outermost grid magnitude, which is the
+    PREDICTED optimum itself and rejected good runs; the unit
+    test over eight seeds caught that too.
+
+    SCIENCE. V1 tested hyp["slope"] > 0, which is |q| and is
+    positive for any successful fit; V1 passed on a perfectly
+    flat response. It now requires a V of significant DEPTH and a
+    displaced minimum. V3's threshold collapsed to zero when a
+    bootstrap sd was missing ("or 0"), passing on a wobble one
+    thirty-second of the noise floor; sds now fall back to the
+    pooled floor and a missing floor fails. V4 passed when both
+    indices were undetermined, since None == None; both must now
+    be determined.
+
+    SCIENCE. The drift detector was rebuilt twice. It originally
+    looked only at k = +/-1, so the textbook signature in the
+    OUTER pair scored as a strong effect, and it only caught both
+    arms FALLING. Pairwise thresholding was then tried and
+    abandoned: it missed the artefact about one seed in eight and
+    raised false alarms on genuine signed effects where noise
+    nudged the far arm the same way. The committed detector is a
+    symmetry decomposition of the whole curve about k = 0,
+      odd   a(+k) - a(-k)           a signed phase lives here
+      even  a(+k) + a(-k) - 2 a(0)  a |k|-tracking artefact does
+    and declares drift when the even component is significant at
+    3 sigma and the odd one is not. No coherent phase can produce
+    a response that depends on the magnitude of the insertion and
+    not on its sign.
+
+    PLUMBING. The control guard keyed on the filename tag, not
+    the link, so one forgotten --tag would have overwritten the
+    main W3-1 job record and then written w3_theta.json from the
+    wrong-link control. It now keys on the link recorded in the
+    job file, and a submitted job record is never overwritten.
+    rung8's corrected-arm gate existed only in the dry branch,
+    was advisory even there, and hardcoded 15; it is now enforced
+    on the submit path with the count derived from the circuit.
+    The on-disk predictions list still carried the withdrawn
+    "negative k" clause; it now carries the A10 text.
+
+    UNIT TESTS. w3_gate_unittest.py runs six synthetic cases,
+    each over eight noise seeds, asserting BOTH the path and the
+    write/refuse decision: true effect at +k, reversed transfer
+    at -k, null, half-step optimum at the grid edge, and a
+    |k|-tracking artefact in each direction. ALL PASS. The
+    earlier single-seed self-test passed only by luck of its
+    seed, which is why the seeded version replaces it.
+
+================================================================
+ORDER OF OPERATIONS, DAY ONE
+  W3-0   preflight              0 s     DONE, PASSED
+  W3-0b  cost ping            3.5 s     re-price the account
+  W3-1   VZ five-arm scan     106 s     as registered, 1024 shots
+         evaluate GATE G-VZ (zero QPU, minutes)
+  W3-1b  wrong-link control    63 s     PATH A ONLY, same day
+  W3-3   epoch 0              21-42 s   anchor the stability curve
+then one epoch per cadence step.
+
+LEDGER, corrected model with the 1.05 safety factor
+  PATH A   3.5 + 106 + 63 + 10 epochs (5 both, 5 plain, 317.5)
+           = 490 s, reserve 110 s
+  PATH B   3.5 + 106 + 207 (W3-2) + 8 plain epochs (169.6)
+           = 486 s, reserve 114 s
+  DRIFT    3.5 + 106 + 63 (3-arm repeat) then re-decide
+GATE G-STAB unchanged: nothing submits that projects past 550 s,
+epochs stop when the remaining budget is below 50 s. Both guards
+now test the safety-loaded cost.
+
+RISKS, updated.
+  R1 theta staleness: largely retired, theta is one day old.
+  R2 triple health: gated and PASSED at W3-0 today.
+  R3 queue depth: 1 to 2 today, wall clock only, waiting is free.
+  R4 sign conventions: strengthened, see A10; the sign is now a
+     stated prediction that can fail, not a silent assumption.
+  R5 NEW. If the true per-gate phase is about twice the applied
+     step the minimum lands on the grid edge (k = +/-2) and the
+     span guard refuses to hand theta to rung8. Verified as case
+     (c) of the self-test. Response: spend the reserve on one
+     3-arm repeat re-centred on the fitted optimum.
+  R6 NEW. The account changed between register 14 and window 3.
+     Same device, same triple, same calibration cadence, but it
+     must be stated in the manuscript's methods.
+================================================================
+
+================================================================
+EXECUTION RECORD, appended 25 Aug 2026 after the window closed.
+Amendments made DURING the run, each labelled by when it was made
+relative to seeing data. Results are in window3_results.txt.
+
+A1a  POST W3-0b, PRE W3-1. The ping charged 5 s against 3.36 s
+     predicted, an apparent 1.49x. Diagnosed as a per-JOB
+     intercept, not a price rise: the ping is 12 circuits and the
+     previous smallest job in the series was 157. Re-fit on all
+     20 charges with c0 = 2.30 s per job gave max under-prediction
+     +1.8 per cent against +32.8 per cent without it, and the
+     safety factor fell from 1.05 to 1.02. Consequence that would
+     have bitten later: the intercept is paid once per CHUNK, so
+     W3-2's eight chunks carry 18.4 s the old model priced at
+     zero. rung10 now counts chunks. Ledger survived intact.
+
+A1b  POST W3-1, PRE W3-1c. The theta hand-off guard keyed on the
+     filename tag as well as the link, which would have blocked
+     the re-centred repeat (a tagged run on the carrier link that
+     MUST be allowed to write theta). Now keys on the link alone.
+
+A1c  POST W3-1c, POST-HOC AND LABELLED AS SUCH. W3-1c returned a
+     curve that bottoms on a FLOOR rather than turning over, so
+     the edge-arm veto built for risk R5 was refusing a theta that
+     was in fact measured, just measured to lie anywhere on a
+     plateau. Added a rule separating the two by asking whether
+     the best arm's neighbour agrees inside the noise. Scope is
+     narrow by construction: it changes only which theta reaches
+     rung8's corrected arm and touches NO pre-registered
+     prediction test. theta = +8.52 +/- 2.84 deg, plateau
+     midpoint; the hyperbola independently gave +9.68.
+
+A1d  POST W3-1b, AUTHOR-APPROVED. Cadence changed from the
+     registered four epochs at ~3 h spacing to nine epochs
+     chained back to back, because the plain-arm anchors showed
+     the round moving on a ~15 min timescale. At the registered
+     spacing the entire transient would have fallen between two
+     samples. Deviation logged in w3_epoch_driver.py.
+
+WHAT THE PRE-REGISTRATION GOT RIGHT, AND WRONG.
+  RIGHT  the five-arm scan rather than a single-theta A/B. The
+         registered V2 sign was wrong (A10 caught it before the
+         run, and the data confirmed the correction is at
+         POSITIVE k); a single-theta test at the register-14 sign
+         would have measured the rotation getting worse and been
+         written up as a refutation. The scan made the sign an
+         output and survived being wrong about it.
+  RIGHT  interleaving the arms per setting. A recalibration fell
+         INSIDE W3-1's execution window and the differential
+         statistics did not care.
+  RIGHT  risk R5. It fired exactly as described, and the span
+         guard held.
+  WRONG  V3, which predicted eta falls at the minimum while eta'
+         stays flat. In W3-1 the correction removed rotation and
+         left eta alone; in the epochs it removed both. Recorded
+         as a failed prediction, not rewritten.
+  WRONG  the 3 h cadence, see A1d.
+  WRONG  the cost model, see A4 and A1a.
+
+FINAL LEDGER
+  W3-0   preflight                      0 s
+  W3-0b  cost ping                      5 s
+  W3-1   five-arm scan                 98 s
+  W3-1c  re-centred repeat             79 s
+  W3-1b  wrong-link control            60 s
+  W3-3   nine epochs                  269 s
+  TOTAL                               511 s of 600, reserve 89 s
+================================================================

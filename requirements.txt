@@ -1,0 +1,11 @@
+# analysis only (re-derives every published number from the stored counts)
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+# certified-given-shots interval arithmetic (series environment)
+python-flint>=0.9
+mpmath>=1.3
+# hardware submission and gate-set tomography (not needed to reproduce numbers)
+qiskit>=1.2
+qiskit-ibm-runtime>=0.29
+pygsti>=0.10.2

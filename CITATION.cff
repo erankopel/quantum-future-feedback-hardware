@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite the accompanying paper."
+title: "quantum-future-feedback-hardware: pre-registered hardware campaigns, code and data"
+authors:
+  - family-names: Kopel
+    given-names: Eran
+    orcid: "https://orcid.org/0000-0003-4657-8636"
+    affiliation: "Tel Aviv University"
+license: MIT
+version: 1.0.0
+doi: "10.5281/zenodo.22099471"
+date-released: 2026-08-25
+preferred-citation:
+  type: article
+  title: "One round is enough: certified entanglement-breaking indices from single-round tomography"
+  authors:
+    - family-names: Kopel
+      given-names: Eran
+      orcid: "https://orcid.org/0000-0003-4657-8636"
+  year: 2026
+  journal: "submitted to Physical Review A"

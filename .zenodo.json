@@ -1,0 +1,29 @@
+{
+  "upload_type": "software",
+  "title": "quantum-future-feedback-hardware: pre-registered hardware campaigns, code and data for certified entanglement-breaking indices from single-round tomography",
+  "description": "<p>Research code, count data, pre-registered plans and machine-checkable gates accompanying <strong>Paper VII</strong> &mdash; <em>One round is enough: certified entanglement-breaking indices from single-round tomography</em>.</p><p>The paper measures the entanglement-breaking index of a thermal collision feedback loop from a single round of tomography, carrying exact binomial intervals through the composition so that the resulting integer is proved rather than fitted, and then tests the construction on hardware across three pre-registered campaigns on one superconducting device (1704 seconds of quantum processor time in total).</p><p>The deposit carries every count, job record and calibration snapshot behind every number in the paper; the pre-registered plans with each amendment dated against the data it had or had not seen; the executable gates that ran before any submission, including the analysis gate that re-derives the series' own published numbers from stored counts and exits non-zero if they do not reproduce; the QPU-second ledgers for all three windows, so the cost of each experiment and the budget guard that bounded it can be audited against the reported totals; and the synthetic unit tests that exercised the decision gate on six cases over eight noise seeds each before it was used on data.</p><p>No data were excluded. Raw provider-format job dumps are omitted for size; every quantity the paper uses is distilled into the stored click probabilities of the result files.</p>",
+  "creators": [
+    {
+      "name": "Kopel, Eran",
+      "affiliation": "Tel Aviv University",
+      "orcid": "0000-0003-4657-8636"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "quantum information",
+    "quantum channels",
+    "entanglement breaking",
+    "entanglement-breaking index",
+    "quantum state tomography",
+    "gate set tomography",
+    "coherent errors",
+    "superconducting qubits",
+    "interval arithmetic",
+    "pre-registration",
+    "reproducible research"
+  ],
+  "language": "eng",
+  "version": "1.0.0"
+}

@@ -1,0 +1,115 @@
+{
+ "label": "float64 probabilities, Arb propagation (register 3, Paper VII)",
+ "delta": 0.001,
+ "settings": 72,
+ "rows": [
+  {
+   "eps": 0.003,
+   "shots": 100000,
+   "implemented": 24,
+   "hoeffding_radius": 0.012329559975556372,
+   "cp_radius_max": 0.01375156614747061,
+   "hoeffding_lower": 8,
+   "cp_lower": 9
+  },
+  {
+   "eps": 0.003,
+   "shots": 1000000,
+   "implemented": 24,
+   "hoeffding_radius": 0.0038989492070408104,
+   "cp_radius_max": 0.004346599261191497,
+   "hoeffding_lower": 14,
+   "cp_lower": 15
+  },
+  {
+   "eps": 0.003,
+   "shots": 10000000,
+   "implemented": 24,
+   "hoeffding_radius": 0.0012329559975556373,
+   "cp_radius_max": 0.00137430259565618,
+   "hoeffding_lower": 19,
+   "cp_lower": 19
+  },
+  {
+   "eps": 0.003,
+   "shots": 100000000,
+   "implemented": 24,
+   "hoeffding_radius": 0.00038989492070408107,
+   "cp_radius_max": 0.000434570941140857,
+   "hoeffding_lower": 21,
+   "cp_lower": 22
+  },
+  {
+   "eps": 0.001,
+   "shots": 100000,
+   "implemented": 46,
+   "hoeffding_radius": 0.012329559975556372,
+   "cp_radius_max": 0.013751571138434171,
+   "hoeffding_lower": 9,
+   "cp_lower": 10
+  },
+  {
+   "eps": 0.001,
+   "shots": 1000000,
+   "implemented": 46,
+   "hoeffding_radius": 0.0038989492070408104,
+   "cp_radius_max": 0.004346599478969137,
+   "hoeffding_lower": 17,
+   "cp_lower": 19
+  },
+  {
+   "eps": 0.001,
+   "shots": 10000000,
+   "implemented": 46,
+   "hoeffding_radius": 0.0012329559975556373,
+   "cp_radius_max": 0.001374302594540394,
+   "hoeffding_lower": 27,
+   "cp_lower": 29
+  },
+  {
+   "eps": 0.001,
+   "shots": 100000000,
+   "implemented": 46,
+   "hoeffding_radius": 0.00038989492070408107,
+   "cp_radius_max": 0.00043457093379172527,
+   "hoeffding_lower": 36,
+   "cp_lower": 37
+  },
+  {
+   "eps": 0.0001,
+   "shots": 100000,
+   "implemented": 81,
+   "hoeffding_radius": 0.012329559975556372,
+   "cp_radius_max": 0.013751573393996366,
+   "hoeffding_lower": 10,
+   "cp_lower": 11
+  },
+  {
+   "eps": 0.0001,
+   "shots": 1000000,
+   "implemented": 81,
+   "hoeffding_radius": 0.0038989492070408104,
+   "cp_radius_max": 0.0043465995775404075,
+   "hoeffding_lower": 19,
+   "cp_lower": 21
+  },
+  {
+   "eps": 0.0001,
+   "shots": 10000000,
+   "implemented": 81,
+   "hoeffding_radius": 0.0012329559975556373,
+   "cp_radius_max": 0.0013743025936697481,
+   "hoeffding_lower": 32,
+   "cp_lower": 36
+  },
+  {
+   "eps": 0.0001,
+   "shots": 100000000,
+   "implemented": 81,
+   "hoeffding_radius": 0.00038989492070408107,
+   "cp_radius_max": 0.0004345709303132358,
+   "hoeffding_lower": 48,
+   "cp_lower": 52
+  }
+ ]
+}
